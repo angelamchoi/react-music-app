@@ -1,8 +1,13 @@
 import React from "react"
 
+//styles
+import './styles/app.scss'
+
 // components
 import Song from "./components/Song";
 import Player from "./components/Player";
+
+
 
 function App() {
   return (

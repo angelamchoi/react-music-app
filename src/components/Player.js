@@ -3,7 +3,7 @@ import React from "react";
 // Font Awesome Component
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 // {} --> importing specfic things from font awesome
-import {faPlay} from '@fortawesome/free-solid-svg-icons';
+import {faPlay, faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 
 
 const Player = () => {
@@ -15,7 +15,9 @@ const Player = () => {
         <p> End Time </p>
         </div>
         <div className="play-control">
-          <FontAwesomeIcon className="play" icon={faPlay} />
+          <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
+          <FontAwesomeIcon className="play" size="2x" icon={faPlay} />
+          <FontAwesomeIcon className="skip-forward" size="2x" icon={faAngleRight} />
         </div>
 
 
