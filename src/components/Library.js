@@ -1,9 +1,16 @@
 import React from 'react';
 import LibrarySong from './LibrarySong';
 
-const Library = ({songs, setCurrentSong}) => {
+const Library = ({
+    songs, 
+    setCurrentSong, 
+    audioRef,
+    isPlaying,
+    setSongs,
+    libraryStatus,
+}) => {
     return(
-        <div className="library">
+        <div className={`library ${libraryStatus ? 'active-library' : ''}`}> 
             <h2>Library</h2>
             <div className="library-songs">
                 {songs.map((song) => (
@@ -13,6 +20,8 @@ const Library = ({songs, setCurrentSong}) => {
                     setCurrentSong={setCurrentSong} //function
                     id={song.id} // ID of song (optional b/c we can access song id from song)
                     key={song.id} // something React requires
+                    audioRef={audioRef}
+                    isPlaying={isPlaying}
                     /> //mapping over to render librarySong component
                 ))}
             </div>

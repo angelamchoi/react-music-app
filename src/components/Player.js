@@ -1,4 +1,4 @@
-import React, { useState} from "react"; //useRef grabs html element
+import React from "react"; //useRef grabs html element
 
 // Font Awesome Component
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -42,7 +42,7 @@ const Player = ({
         <input 
           type="range" 
           min={0} // min length of song
-          max={songInfo.duration} //max length of song
+          max={songInfo.duration || 0} //max length of song // setting 0 as default
           value={songInfo.currentTime} //current time
           onChange={dragHandler}
           />

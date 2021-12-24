@@ -1,6 +1,13 @@
 import React from "react";
 
-const LibrarySong = ({ song, songs, setCurrentSong, id }) => {
+const LibrarySong = ({ 
+  song, 
+  songs, 
+  setCurrentSong, 
+  id, 
+  audioRef,
+  isPlaying, 
+}) => {
    //Event
    const songSelectHandler =() => {
       const selectedSong = songs.filter((state) => state.id === id); 
@@ -9,7 +16,18 @@ const LibrarySong = ({ song, songs, setCurrentSong, id }) => {
        // filtering out the whole state songs to just the song we clicked on
        // returns an array 
        setCurrentSong(selectedSong[0]);
-   } 
+       //check if the song is playing
+       if(isPlaying){
+         const playPromise = audioRef.current.play();
+         if(playPromise !== undefined){
+           playPromise.then((audio) => {
+             audioRef.current.play();
+           })
+         }
+       }
+       //if my song is playing, then create a playPromise to play the song
+       //if my playPromise  the audio is undefined(not loaded up yet) then wait and then play
+   }; 
   return (
     <div onClick={songSelectHandler} className="library-song">
       <img alt={song.name} src={song.cover}></img>
