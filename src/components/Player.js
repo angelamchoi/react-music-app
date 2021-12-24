@@ -12,6 +12,8 @@ const Player = ({
   audioRef, 
   setSongInfo, 
   songInfo,
+  songs,
+  setCurrentSong,
 }) => {
 
   //Event Handlers
@@ -30,10 +32,35 @@ const Player = ({
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2) // formats time - min:sec
     );
   };
+  
   const dragHandler =(e) => {
     audioRef.current.currentTime = e.target.value;
     setSongInfo({...songInfo, currentTime: e.target.value})
   }
+
+  const skipTrackHandler =(direction) => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id); // does the id here match the id from state and if it does give me the index
+    if(direction === 'skip-forward'){
+      setCurrentSong(songs[(currentIndex +1) % songs.length]); //go to the songs array and dynamically change the index ---> so we are incrementing current index by 1
+      console.log(`next index: ${currentIndex + 1}`);
+      console.log( `songs length: ${songs.length}`);
+    }
+    if(direction === 'skip-back'){
+      if((currentIndex -1) % songs.length === -1){ //if our index equals -1 
+        setCurrentSong(songs[songs.length -1]); // then set current song to the remainder 
+        return;
+      }
+      setCurrentSong(songs[(currentIndex - 1) % songs.length]); //only applies to the middle songs
+    }
+  };
+
+//1. Need to know where I am and which song I selected so that I know which song to go forward and backwards ---> use index
+//2. need to access songs
+// 3. we can't do currentIndex + 1 because there is no song #9,10,etc.. and so the .length will match and go back to 0.
+// 4. when it is on the first song and we go backwards it crashes
+// --->do a check
+// so if it currentIndex: 8 and songs.length:8 then go to the remainder of 0
+
 
   return (
     <div className="player">
@@ -49,14 +76,22 @@ const Player = ({
         <p> {getTime(songInfo.duration)} </p>
         </div>
         <div className="play-control">
-          <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
+          <FontAwesomeIcon 
+            onClick={() => skipTrackHandler('skip-back')} //arrow function so we are not invoking it immediately
+            className="skip-back" 
+            size="2x" 
+            icon={faAngleLeft} />
           <FontAwesomeIcon 
             onClick={playSongHandler} 
             className="play" 
             size="2x" 
             icon={isPlaying ? faPause : faPlay } /> 
              {/* // if it is playing show pause, if it is not then show play  */}
-          <FontAwesomeIcon className="skip-forward" size="2x" icon={faAngleRight} />
+          <FontAwesomeIcon
+            onClick={() => skipTrackHandler('skip-forward')} 
+            className="skip-forward" 
+            size="2x" 
+            icon={faAngleRight} />
         </div>
     </div>
   );
