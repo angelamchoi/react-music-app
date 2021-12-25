@@ -10,7 +10,7 @@ const Library = ({
     libraryStatus,
 }) => {
     return(
-        <div className={`library ${libraryStatus ? 'active-library' : ''}`}> 
+        <div className={`library ${libraryStatus ? "active-library" : " "}`}> 
             <h2>Library</h2>
             <div className="library-songs">
                 {songs.map((song) => (
@@ -22,6 +22,8 @@ const Library = ({
                     key={song.id} // something React requires
                     audioRef={audioRef}
                     isPlaying={isPlaying}
+                    active={song.active}
+                    setSongs={setSongs}
                     /> //mapping over to render librarySong component
                 ))}
             </div>

@@ -10,6 +10,7 @@
     transition: all 0.5s ease-in;
     opacity: 0;
     transform: translateX(-100%);
+    border-radius: 1rem;
     h2 {
       padding: 2rem;
     }
@@ -17,18 +18,16 @@
   
   .library-song {
     display: flex;
-    // align-items: center;
     padding: 1rem 2rem 1rem 2rem;
     cursor: pointer;
     transition: all 0.75s ease-out;
     flex-direction: column;
-    background-color: lightcyan;
 
     img {
       width: 30%;
     }
     &:hover {
-      background: rgb(194, 208, 253)
+      background: rgb(154, 170, 221)
     }
   }
   .song-description {
@@ -64,6 +63,7 @@
   .selected {
     background: rgb(194, 208, 253);
   }
+  //library toggle
   .active-library {
     transform: translateX(0%);
     opacity: 1;

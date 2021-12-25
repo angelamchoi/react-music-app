@@ -1,4 +1,4 @@
-import React from "react"; //useRef grabs html element
+import React, {useEffect} from "react"; //useRef grabs html element
 
 // Font Awesome Component
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -14,7 +14,29 @@ const Player = ({
   songInfo,
   songs,
   setCurrentSong,
+  setSongs,
 }) => {
+  //UseEffect ---> using this to change the UI State of current song being played in the library section
+  useEffect(() => {
+   // Add Active State
+    const newSongs = songs.map((song) => {
+      if (song.id === currentSong.id) {
+        return {
+          ...song,
+          active: true,
+        };
+      } else {
+        return {
+          ...song,
+          active: false,
+        };
+      }
+    });
+    setSongs(newSongs);
+  }, [currentSong]); //run this function everytime our currentSong function gets updated
+
+//setting the song id to the current song id
+// at the end run currentSong function
 
   //Event Handlers
   const playSongHandler = () => {
