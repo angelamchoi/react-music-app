@@ -1,4 +1,11 @@
 import React, {useState, useRef} from "react"
+  
+  //light & dark mode
+import {ThemeProvider} from "styled-components";
+import  {useDarkMode} from "./components/useDarkMode"
+import { GlobalStyles } from "./components/GlobalStyle";
+import { lightTheme, darkTheme } from "./components/Theme"
+import Toggle from "./components/Toggler"
 //styles
 import './styles/app.scss'
 
@@ -24,6 +31,12 @@ function App() {
     animationPercentage: 0,
   });
   const [libraryStatus, setLibraryStatus] = useState(false);
+  
+  //light & dark mode
+
+  const [theme, themeToggler, mountedComponent] = useDarkMode();
+
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
   // Event
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime;
@@ -34,9 +47,14 @@ function App() {
     const animation = Math.round((roundedCurrent / roundedDuration) * 100); //current time divided by duration then times 100
     setSongInfo({...songInfo, currentTime: current, duration, animationPercentage: animation}) //whatever info we had already update it to the current time variable and duration
   };
+  if(!mountedComponent) return <div/>
 
   return (
+    <ThemeProvider theme={themeMode}>
+    <>
+    <GlobalStyles/>
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
+    <Toggle theme={theme} toggleTheme={themeToggler} />
       <Nav 
         libraryStatus={libraryStatus} 
         setLibraryStatus={setLibraryStatus} />
@@ -67,6 +85,8 @@ function App() {
           src={currentSong.audio}
       ></audio>
     </div>
+    </>
+    </ThemeProvider>
   );
 }
 
