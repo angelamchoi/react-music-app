@@ -8,7 +8,7 @@ import Player from "./components/Player";
 import Library from "./components/Library";
 import Nav from "./components/Nav";
 // data
-import data from "./util";
+import data from "./data";
 
 
 function App() {

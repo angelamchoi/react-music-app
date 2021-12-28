@@ -4,6 +4,7 @@ import React, {useEffect} from "react"; //useRef grabs html element
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 // {} --> importing specfic things from font awesome
 import {faPlay, faAngleLeft, faAngleRight, faPause,} from '@fortawesome/free-solid-svg-icons';
+import {playAudio} from '../util';
 
 const Player = ({
   currentSong, 
@@ -74,6 +75,7 @@ const Player = ({
       }
       setCurrentSong(songs[(currentIndex - 1) % songs.length]); //only applies to the middle songs
     }
+    playAudio(isPlaying, audioRef);
   };
 
 //1. Need to know where I am and which song I selected so that I know which song to go forward and backwards ---> use index
