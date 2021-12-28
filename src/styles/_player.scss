@@ -10,17 +10,28 @@
     width: 50%;
     display: flex;
     align-items: center;
-    background: lightcoral;
     input {
       width: 100%;
       padding: 1rem 2rem;
       -webkit-appearance: none;
+      background-color: transparent;
       cursor: pointer;
     }
     p {
       padding: 1rem;
     }
   }
+
+  input[type="range"]:focus {
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+  
+  }
+
   .play-control {
     display: flex;
     justify-content: space-between;
@@ -38,6 +49,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
+   
   }
   .animate-track {
     background: rgb(204, 204, 204);
@@ -49,6 +61,8 @@
     transform: translateX(0%);
     padding: 1rem;
     pointer-events: none;
+   
+   
   }
 
   

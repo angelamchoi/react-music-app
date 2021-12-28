@@ -85,11 +85,20 @@ const Player = ({
 // --->do a check
 // so if it currentIndex: 8 and songs.length:8 then go to the remainder of 0
 
+// styles for animation
+const trackAnimation = {
+  transform: `translateX(${songInfo.animationPercentage}%)`,
+};
 
   return (
     <div className="player">
       <div className="time-control">
         <p> {getTime(songInfo.currentTime)}</p>
+      <div className style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
+          }}
+          className="track"
+      > 
         <input 
           type="range" 
           min={0} // min length of song
@@ -97,6 +106,8 @@ const Player = ({
           value={songInfo.currentTime} //current time
           onChange={dragHandler}
           />
+          <div style={trackAnimation} className="animate-track"></div> 
+        </div>
         <p> {getTime(songInfo.duration)} </p>
         </div>
         <div className="play-control">
@@ -122,3 +133,6 @@ const Player = ({
 };
 
 export default Player;
+
+//Notes
+// animate-track goes on top of track and will reveal where we are in the track
