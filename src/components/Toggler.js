@@ -3,7 +3,7 @@ import { func, string } from 'prop-types';
 import styled from "styled-components"
 
 const Button = styled.button`
-  
+
   border: 2px solid ${({ theme }) => theme.toggleBorder};
   border-radius: 30px;
   cursor: pointer;
@@ -16,7 +16,6 @@ const Button = styled.button`
   width: 8rem;
   height: 4rem;
   outline: none;
-  }
 
 `;
 
